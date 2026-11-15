@@ -1,0 +1,32 @@
+server:
+  host: "127.0.0.1"
+  port: 8003
+  debug: false
+
+can:
+  bus_mode: "virtual" # Options: "virtual" (in-memory, multi-OS) or "socketcan" (Linux vcan0)
+  interface_name: "vcan0"
+  bitrate_kbps: 500
+  signal_config: "config/can_signals.json"
+
+ids:
+  enable_detection: true
+  rules:
+    whitelist_enabled: true
+    timing_jitter_enabled: true
+    kinematic_delta_enabled: true
+    counter_crc_enabled: true
+    bus_load_enabled: true
+    replay_window_enabled: true
+  thresholds:
+    max_accel_kmh_per_sec: 45.0
+    max_decel_kmh_per_sec: 65.0
+    timing_jitter_tolerance_pct: 80.0
+    bus_load_alert_pct: 75.0
+    replay_duplicate_window_ms: 15.0
+    flood_rate_cap_fps: 400
+    flood_timeout_sec: 3.5
+
+storage:
+  db_path: "data/can_events.db"
+  max_frame_history: 10000
